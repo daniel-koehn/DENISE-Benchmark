@@ -9,4 +9,6 @@ diff FWI_workflow_marmousi.inp DENISE-Black-Edition/par/FWI_workflow_marmousi.in
 
 Currently the following benchmark problems are included:
 
-Modified Marmousi-II problem for different acquisition geometries
+- Modified Marmousi-II problem for different acquisition geometries
+
+Visualization of the FWI results can be accomplished by Matlab-scripts and custom colormaps.
