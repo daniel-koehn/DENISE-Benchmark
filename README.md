@@ -9,7 +9,9 @@ diff FWI_workflow_marmousi.inp DENISE-Black-Edition/par/FWI_workflow_marmousi.in
 
 Currently the following benchmark problems are included:
 
+- 2 inclusion toy example
 - Modified Marmousi-II problem for different acquisition geometries
+- 2D Overthrust model
 - Rayleigh wave ultrasonic data from the Porta Nigra in Trier (Germany)
 
-Visualization of the FWI results can be accomplished by Matlab-scripts and custom colormaps.
+Visualization of the FWI results can be accomplished with Matplotlib and custom colormaps.
