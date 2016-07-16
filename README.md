@@ -1,5 +1,5 @@
 # DENISE-Benchmark
-Benchmark problems for DENISE-Black-Edition
+Benchmark problems for DENISE-Black-Edition and GERMAINE
 
 Collection of benchmark problems including input-, source and receiver files for DENISE-Black-Edition.
 Input files might not up to date with the latest version of DENISE-Black-Edition. Therefore, always compare the 
