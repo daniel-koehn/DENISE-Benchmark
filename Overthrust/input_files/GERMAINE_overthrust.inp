@@ -9,8 +9,14 @@
 # 3-D Salt and Overthrust models,
 # Society of Exploration Geophysicists.
 # 
-#-------------------- GERMAINE modus ------------------------------------- 
-forward_modelling_(yes=0)_FDFWI_(yes=1)_GRID_SEARCH_(yes=2)_(INVMAT) = 0
+#-------------------- GERMAINE modus -----------------------------------
+forward_modelling_(yes=0)_FDFWI_(yes=1)_RTM_(yes=2)_(INVMAT) = 0
+#
+# ---------------- GERMAINE Physics ------------------------------------
+(2D-AC=1;2D-SH=2)_(PHYSICS) = 1
+#
+#-------------- MPI Parallelization ------------------------------------
+number_of_processors_for_frequency_parallelization_(NPROCFREQ) = 1
 #
 #-------------------- 2-D Grid -----------------------------------------
 number_of_gridpoints_in_x-direction_(NX) = 800
@@ -19,15 +25,21 @@ distance_between_gridpoints(in_m)_(DH) = 25.0
 #
 #--------------------Source---------------------------------------------
 # File with source positions:
-SOURCE_FILE = ./source/source_OVER.dat 
+SOURCE_FILE = ./source/source_OVER.dat
+# Read time-domain source wavelet from SU file:
+READ_WAVELET = 0
+WAVELET_NAME = start/wavelet.su
 #
 #--------------------- Model -------------------------------------------
 read_model_parameters_from_MFILE(yes=1)(READMOD) = 1
 MFILE = start/overthrust_true
 #
+#----------------------Free Surface-------------------------------------
+free_surface_(yes=1)(FREE_SURF) = 0
+#
 #--------------------- Define PML parameters ---------------------------
-width_of_absorbing_frame_(in_gridpoints)_(NPML) = 30
-damping_parameter_(A0_PML) = 1.79
+width_of_absorbing_frame_(in_gridpoints)_(NPML) = 10
+damping_parameter_(A0_PML) = 90
 #
 #----------------------Snapshots----------------------------------------
 output_of_P_field_(SNAP)(yes>0) = 0
@@ -58,13 +70,14 @@ info_of_processing_element_zero_to_stdout_(yes=1/no=0)_(LOG) = 1
 #-----------------------------------------------------------------------
 # GERMAINE inversion parameters
 # ----------------------------------------------------------------------
-number_of_TDFWI_iterations_(ITERMAX) = 50
+number_of_TDFWI_iterations_(ITERMAX) = 100
 invert_STF_using_Wiener_Deco_(yes=1/no=0)_(STF_INV) = 0
 output_of_jacobian_(JACOBIAN) = gradient/gradient
 seismograms_of_measured_data_(DATA_DIR) = seis/overthrust_true/overthrust
 cosine_taper_(yes=1/no=0)_(TAPER) = 0
 taper_length_(in_rec_numbers)_(TAPERLENGTH) = 3
-Regularization_term_for_inverse_Hessian_(EPS_HESS) = 0.05
+HESSIAN_(no=0/app_Hessian=1/pseudo_Hessian=2) = 2
+Regularization_term_for_inverse_Hessian_(EPS_HESS) = 0.01
 gradient_taper_geometry_(GRADT1,GRADT2,GRADT3,GRADT4) = 2, 5, 490, 500
 #
 # ----- Definition of gradient taper geometry ----- #
@@ -92,12 +105,13 @@ first_gradient_to_be_saved(nfstart_jac) = 2000
 increment_between_saved_gradients_(nf_jac) = 1
 #
 # ----- Upper and lower limits for model parameters ----- #
-upper_limit_for_vp/lambda_(VPUPPERLIM) = 6500.0
-lower_limit_for_vp/lambda_(VPLOWERLIM) = 300.0
+upper_limit_for_vp/lambda_(VPUPPERLIM) = 7000.0
+lower_limit_for_vp/lambda_(VPLOWERLIM) = 2000.0
 #
 # ----- Optimization-Method ------ #
-gradient_method_(PCG=1/LBFGS=2/GRADIENT=3)_(GRAD_METHOD) = 2
-save_(NLBFGS)_updates_during_LBFGS_optimization = 50
+gradient_method_(PCG=1/LBFGS=2)_(GRAD_METHOD) = 2
+PCG_BETA_(Fletcher_Reeves=1/Polak_Ribiere=2/Hestenes_Stiefel=3/Dai_Yuan=4) = 2
+save_(NLBFGS)_updates_during_LBFGS_optimization = 25
 #
 #----- Definition of smoothing the models vp and vs ----- #
 apply_spatial_filtering_(1=yes)_(MODEL_FILTER) = 0
@@ -115,10 +129,6 @@ log_file_for_misfit_evolution_(MISFIT_LOG_FILE) = LOG_TEST.dat
 #
 # ----- Minimum number of iteration per frequency ----- #
 MIN_ITER = 0;
-#
-# ----- Definition of smoothing the Jacobians with 2D-Gaussian ----- #
-apply_spatial_filtering_(yes=1)_(GRAD_FILTER) = 0
-filter_length_in_gridpoints_(FILT_SIZE_GRAD) = 0
 #
 # ----- 1D linear gradient grid search parameters ------------------ #
 Range_of_P_wave_velocity_on_free_surface_(VP0_1,VP0_2,DVP0) = 1500.0, 2501.0, 1.0 
