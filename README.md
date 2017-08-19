@@ -9,6 +9,7 @@ diff FWI_workflow_marmousi.inp DENISE-Black-Edition/par/FWI_workflow_marmousi.in
 
 Currently the following benchmark problems are included:
 
+- 2 cross TE mode example
 - 2 inclusion toy example
 - acoustic analytical solution
 - anisotropic elastic VTI/TTI zinc model
