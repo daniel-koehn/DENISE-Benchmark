@@ -117,8 +117,8 @@ limits_for_sigmar_(MAT1_LOW,MAT1_UP) = 300.0, 6000.0
 limits_for_epsilonr_(MAT2_LOW,MAT2_UP) = 1.25, 2000.0
 #
 # --- Normalization factor for material parameters ----- #
-norm_vp_(MAT1_NORM) = 1.0
-norm_density_(MAT2_NORM) = 1.0
+norm_sigma_(MAT1_NORM) = 5.6e-3
+norm_epsilon_(MAT2_NORM) = 8.85e-12
 #
 # ----- Optimization-Method ------ #
 gradient_method_(PCG=1/LBFGS=2)_(GRAD_METHOD) = 1
