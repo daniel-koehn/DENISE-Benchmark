@@ -114,15 +114,15 @@ increment_between_saved_gradients_(nf_jac) = 1
 #
 # ----- Upper and lower bound for model parameters ----- #
 limits_for_sigmar_(MAT1_LOW,MAT1_UP) = 0.0, 3.57
-limits_for_epsilonr_(MAT2_LOW,MAT2_UP) = 0.01, 1.20
+limits_for_epsilonr_(MAT2_LOW,MAT2_UP) = 0.005, 1.20
 #
 # --- Normalization factor for material parameters ----- #
 norm_sigma_(MAT1_NORM) = 5.6e-3
 norm_epsilon_(MAT2_NORM) = 8.85e-12
 #
 # ----- Optimization-Method ------ #
-gradient_method_(PCG=1/LBFGS=2/Descent=3)_(GRAD_METHOD) = 3
-PCG_BETA_(Fletcher_Reeves=1/Polak_Ribiere=2/Hestenes_Stiefel=3/Dai_Yuan=4) = 2
+gradient_method_(PCG=1/LBFGS=2/Descent=3)_(GRAD_METHOD) = 2
+PCG_BETA_(Fletcher_Reeves=1/Polak_Ribiere=2/Hestenes_Stiefel=3/Dai_Yuan=4) = 1
 save_(NLBFGS)_updates_during_LBFGS_optimization = 5
 #
 #----- Definition of smoothing the models vp and vs ----- #
