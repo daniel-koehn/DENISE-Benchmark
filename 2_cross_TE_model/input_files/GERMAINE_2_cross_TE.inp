@@ -54,7 +54,7 @@ output_of_P_field_(SNAP)(yes>0) = 0
 increment_x-direction_(IDX) = 1
 increment_y-direction_(IDY) = 1
 data-format_(SNAP_FORMAT)(ASCII(2);BINARY(3)) = 3
-basic_filename_(SNAP_FILE) = ./snap/incl2
+basic_filename_(SNAP_FILE) = ./snap/2_cross_TE
 #
 #---------------------- Receiver ---------------------------------------
 output_of_seismograms_(SEISMO) = 1 
@@ -122,7 +122,7 @@ norm_epsilon_(MAT2_NORM) = 8.85e-12
 #
 # ----- Optimization-Method ------ #
 gradient_method_(PCG=1/LBFGS=2/Descent=3)_(GRAD_METHOD) = 2
-PCG_BETA_(Fletcher_Reeves=1/Polak_Ribiere=2/Hestenes_Stiefel=3/Dai_Yuan=4) = 1
+PCG_BETA_(Fletcher_Reeves=1/Polak_Ribiere=2/Hestenes_Stiefel=3/Dai_Yuan=4) = 2
 save_(NLBFGS)_updates_during_LBFGS_optimization = 5
 #
 #----- Definition of smoothing the models vp and vs ----- #
@@ -130,10 +130,10 @@ apply_spatial_filtering_(1=yes)_(MODEL_FILTER) = 0
 filter_length_in_gridpoints_(FILT_SIZE) = 5
 #
 #----- Step length estimation ------# 
-step_length_estimation_(Wolfe=1/Parabolic=2)_(LINESEARCH) = 2
+step_length_estimation_(Wolfe=1/Parabolic=2)_(LINESEARCH) = 1
 maximum_model_change_of_maximum_model_value_(EPS_SCALE) = 0.01 
 parameters_for_Wolfe_conditions_(C1,C2) = 1e-4, 0.9
-maximum_number_of_attemps_to_find_a_step_length_(STEPMAX) = 6
+maximum_number_of_attemps_to_find_a_step_length_(STEPMAX) = 20
 SCALEFAC = 2.0
 #
 #----- MISFIT LOG FILE -----#
