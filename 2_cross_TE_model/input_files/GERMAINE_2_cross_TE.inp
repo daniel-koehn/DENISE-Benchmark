@@ -113,8 +113,8 @@ first_gradient_to_be_saved(nfstart_jac) = 2000
 increment_between_saved_gradients_(nf_jac) = 1
 #
 # ----- Upper and lower bound for model parameters ----- #
-limits_for_sigmar_(MAT1_LOW,MAT1_UP) = 0.0, 3.57
-limits_for_epsilonr_(MAT2_LOW,MAT2_UP) = 0.005, 1.20
+limits_for_sigmar_(MAT1_LOW,MAT1_UP) = 0.0001, 0.01
+limits_for_epsilonr_(MAT2_LOW,MAT2_UP) = 8.86e-12, 7.0e-11
 #
 # --- Normalization factor for material parameters ----- #
 norm_sigma_(MAT1_NORM) = 5.6e-3
