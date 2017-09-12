@@ -18,7 +18,7 @@
 # Geophysical Journal International, 197, 248-268.
 # 
 #-------------------- GERMAINE modus -----------------------------------
-forward_modelling_(yes=0)_FDFWI_(yes=1)_RTM_(yes=2)_(INVMAT) = 0
+forward_modelling_(yes=0)_FDFWI_(yes=1)_RTM_(yes=2)_(INVMAT) = 1
 #
 # ---------------- GERMAINE Physics ------------------------------------
 (2D-AC=1;2D-SH=2;2D-TE=4)_(PHYSICS) = 4
@@ -40,7 +40,7 @@ WAVELET_NAME = start/wavelet.su
 #
 #--------------------- Model -------------------------------------------
 read_model_parameters_from_MFILE(yes=1)(READMOD) = 1
-MFILE = start/2_cross_TE_true
+MFILE = start/2_cross_TE_init
 #
 #----------------------Free Surface-------------------------------------
 free_surface_(yes=1)(FREE_SURF) = 0
@@ -78,13 +78,13 @@ info_of_processing_element_zero_to_stdout_(yes=1/no=0)_(LOG) = 1
 #-----------------------------------------------------------------------
 # GERMAINE inversion parameters
 # ----------------------------------------------------------------------
-number_of_TDFWI_iterations_(ITERMAX) = 1000
+number_of_TDFWI_iterations_(ITERMAX) = 20
 invert_STF_using_Wiener_Deco_(yes=1/no=0)_(STF_INV) = 0
 output_of_jacobian_(JACOBIAN) = gradient/gradient
 seismograms_of_measured_data_(DATA_DIR) = seis/2_cross_TE_true/2_cross_TE
 cosine_taper_(yes=1/no=0)_(TAPER) = 0
 taper_length_(in_rec_numbers)_(TAPERLENGTH) = 4
-HESSIAN_(no=0/app_Hessian=1/pseudo_Hessian=2) = 2
+HESSIAN_(no=0/app_Hessian=1/pseudo_Hessian=2) = 0
 Regularization_term_for_inverse_Hessian_(EPS_HESS) = 0.01
 gradient_taper_geometry_(GRADT1,GRADT2,GRADT3,GRADT4) = 22, 25, 490, 500
 #
@@ -113,15 +113,15 @@ first_gradient_to_be_saved(nfstart_jac) = 2000
 increment_between_saved_gradients_(nf_jac) = 1
 #
 # ----- Upper and lower bound for model parameters ----- #
-limits_for_sigmar_(MAT1_LOW,MAT1_UP) = 0.0001, 0.01
-limits_for_epsilonr_(MAT2_LOW,MAT2_UP) = 8.86e-12, 7.0e-11
+limits_for_sigmar_(MAT1_LOW,MAT1_UP) = 0.0, 1e6
+limits_for_epsilonr_(MAT2_LOW,MAT2_UP) = 0.0, 1e6
 #
 # --- Normalization factor for material parameters ----- #
-norm_sigma_(MAT1_NORM) = 5.6e-3
-norm_epsilon_(MAT2_NORM) = 8.85e-12
+norm_sigma_(MAT1_NORM) = 1.0
+norm_epsilon_(MAT2_NORM) = 1.0
 #
 # ----- Optimization-Method ------ #
-gradient_method_(PCG=1/LBFGS=2/Descent=3)_(GRAD_METHOD) = 2
+gradient_method_(PCG=1/LBFGS=2/Descent=3)_(GRAD_METHOD) = 3
 PCG_BETA_(Fletcher_Reeves=1/Polak_Ribiere=2/Hestenes_Stiefel=3/Dai_Yuan=4) = 4
 save_(NLBFGS)_updates_during_LBFGS_optimization = 5
 #
