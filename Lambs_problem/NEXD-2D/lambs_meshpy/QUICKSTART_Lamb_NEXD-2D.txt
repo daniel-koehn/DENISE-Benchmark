@@ -1,0 +1,91 @@
+Quickstart to run Lambs problem with NEXD-2D using MeshPy grid generation
+
+Minimum requirements:
+---------------------
+Intel Core i7 or similar AMD CPU with 8 cores
+8 GB RAM
+
+Fortran-Compiler: mpif90
+MPI-library: OpenMPI
+other libraries: - METIS version 4.0.3 - http://glaros.dtc.umn.edu/gkhome/metis/metis/overview
+		 - Lapack
+		 - Python packages, I recommend Anaconda: https://www.anaconda.com/download/#linux
+		 - MeshPy for grid generation
+
+Numpy/Scipy/Matplotlib/Paraview for seismic data and model visualization 
+
+On NEC-cluster @ computing centre Kiel activate Lapack module by typing
+
+module load lapack3.8.0
+
+1. Clone NEXD-2D on your local machine
+
+   git clone --depth=1 https://github.com/seismology-RUB/NEXD-2D.git
+
+2. Modify the compiler options in Makefile according to the used computer. 
+   On the NEC-cluster replace:
+
+   lib = metis-4.0.3/libmetis.a 
+   
+   by
+
+   lib = /sfs/fs2/work-sh2/sungw331/libs/metis-4.0.3/libmetis.a
+
+3. If you use Python 3.0+ replace in the python code /tools/scripts/makeDepFromUseInclude.py
+
+   print entry
+
+   by
+
+   print(entry)
+
+4. Clone Lambs problem with MeshPy grid generation on your local machine 
+
+   git clone --depth=1 https://github.com/daniel-koehn/DENISE-Benchmark
+
+5. Copy lambs_meshpy from DENISE-Benchmark/Lambs_problem to NEXD-2D/simulations
+
+   cp -rf DENISE-Benchmark/Lambs_problem/lambs_meshpy NEXD-2D/simulations
+
+6. By running the Jupyter notebook 
+
+   meshpy_lambs_problem.ipynb
+
+   in lambs_meshpy/meshpy you can generate all necessary NEXD-2D model files:
+
+   absorb, coord, free, mat, matprop and mesh
+
+   The mesh is created by the MeshPy TRIANGLE package. In the mesh plot free surface nodes are displayed in red 
+   and absorbing boundary nodes in red, except for the nodes connecting free and absorbing boundary conditions.
+
+7. Check the number of MPI-processes you want to use in data/parfile
+
+   # Number of Processors
+   nproc = 8     # depending on setup (currently max is 96)
+
+8. By running the shell script 
+
+   /lambs_meshpy/process.sh
+
+   you create the internal NEXD-2D mesh and distribute it over the used MPI processes with METIS.
+   You can check if the MeshPy model is correctly read by the NEXD-2D mesher by visualizing the 
+   VTK file out/vp_model.vtk e.g. with Paraview. The METIS mesh distribution is printed in the 
+   postscript files mesh0xx.ps
+
+8. Run NEXD-2D on e.g. 8 cores by typing
+
+   mpirun -np 8 bin/solver
+
+   in /lambs_meshpy
+
+9. Plot seismogram comparisons between the NEXD-2D, SPECFEM-2D and anaytical solutions with the Jupyter notebook
+
+   /lambs_meshpy/NEXD-2D_plot_seis
+
+10. Create a fancy wave propagation movie by typing 
+
+    mpirun -np 8 bin/movie
+
+11. The NEXD-2D movie output consists of multiple VTK files which can be displayed e.g. with Paraview
+
+Congratulations, you just finished your first time-domain NEXD-2D modelling.
