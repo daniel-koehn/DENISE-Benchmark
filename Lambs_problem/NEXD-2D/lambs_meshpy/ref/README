@@ -7,3 +7,7 @@ Vz_file_ascii_rec1
 SPECFEM:
 S0001.AA.BXX.semd
 S0001.AA.BXZ.semd
+
+NEXD-2D (irregular grid + simple absorbing BC without PMLs):
+seismo_NEXD.x.0000001.sdu
+seismo_NEXD.z.0000001.sdu

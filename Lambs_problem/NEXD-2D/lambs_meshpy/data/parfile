@@ -24,7 +24,7 @@ externalfilename        = cold_flach2.grd   # File containing the external model
 extvel                  = .false.           # "true" if external velocity model should be loaded, otherwise "false"
 
 # Movie parameters
-movie                   = .true.            # if "true" the a movie is created, otherwise "false"
+movie                   = .false.           # if "true" the a movie is created, otherwise "false"
 frame                   = 100               # Number of time steps for each frame of the movie
 save_movie_trimesh      = .true.            # Create files with average in each element
 save_movie_points       = .true.            # Create files with data for each point
@@ -38,9 +38,9 @@ save_movie_q2           = .false.           # Plot velocity of the second fluid
 
 # Parameters for Timeintegration
 timeint                 = 2                 # which timeintegration? 1:euler 2:rk2 3:rk3
-nt                      = 7000              # Number of timesteps
-autodt                  = .true.            # automatic calculation of dt
-dt                      = 0.0               # if autodt = .false. choose dt manually
+nt                      = 6000              # Number of timesteps
+autodt                  = .false.           # automatic calculation of dt
+dt                      = 2.3e-4            # if autodt = .false. choose dt manually
 cfl                     = 0.4               # cfl value for dt
 
 # pmlparameters
